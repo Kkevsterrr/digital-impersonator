@@ -9,10 +9,13 @@ except ImportError:
 	from ffmpy import FFmpeg
 
 def convert(fileName, savedir):
-    print 'Converting ' + local_filename
-    ff = FFmpeg(inputs={(fileName+'.mp3'): None},outputs={os.path.join(savedir, fileName+'.wav'): None})
-    #print ff.cmd
-    ff.run()
+	print 'Converting ' + local_filename
+	ff = FFmpeg(inputs={(fileName+'.mp3'): None},outputs={os.path.join(savedir, fileName+'.wav'): None})
+	#print ff.cmd
+	try:
+		ff.run()
+	except:
+		print 'Err running ' + ff.cmd + ', please try again.'
 
 def make_dir(path):
     try:
