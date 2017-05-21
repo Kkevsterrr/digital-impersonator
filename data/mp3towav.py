@@ -23,12 +23,16 @@ def make_dir(path):
             raise
 
 if __name__ == "__main__":
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    new_path = os.path.join(dir_path, 'WAV')
-    make_dir(new_path)
-    for filename in os.listdir(dir_path):
-        local = filename.split('.')
-        local_filename = local[0]
-        local_ext = local[-1]
-        if local_ext == "mp3":
-            convert(local_filename,new_path)
+	dir_path = os.path.dirname(os.path.realpath(__file__))
+	new_path = os.path.join(dir_path, 'WAV')
+	make_dir(new_path)
+	for filename in os.listdir(dir_path):
+		local = filename.split('.')
+		local_filename = local[0]
+		local_ext = local[-1]
+		# Check to see if wav exists
+		if os.path.isfile(os.path.join(new_path, local_filename+'.wav')):
+			print local_filename+'.wav already exists'
+		else:
+			if local_ext == "mp3":
+				convert(local_filename,new_path)
