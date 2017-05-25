@@ -9,18 +9,18 @@ except ImportError:
 	from ffmpy import FFmpeg
 
 def convert(fileName, savedir):
-	print 'Converting ' + local_filename
-	ff = FFmpeg(inputs={(fileName+'.mp3'): None},outputs={os.path.join(savedir, fileName+'.wav'): None})
+	print '\x1b[4;32;40m' + 'Converting ' + local_filename +'\x1b[0m'
+	ff = FFmpeg(inputs={(fileName+'.mp3'): '-hide_banner -loglevel panic'},outputs={os.path.join(savedir, fileName+'.wav'): None})
 	#print ff.cmd
 	try:
 		ff.run()
 	except:
-		print 'Err running ' + ff.cmd + ', please try again.'
+		print '\x1b[4;30;41m' + 'Err running ' + ff.cmd + ', please try again.'+ '\x1b[0m'
 
 def make_dir(path):
     try:
         os.makedirs(path)
-        print 'New directory made at ' + path
+        print '\x1b[4;32;40m' + 'New directory made at ' + path + '\x1b[0m'
     except OSError:
         if not os.path.isdir(path):
             raise
@@ -35,7 +35,7 @@ if __name__ == "__main__":
 		local_ext = local[-1]
 		# Check to see if wav exists
 		if os.path.isfile(os.path.join(new_path, local_filename+'.wav')):
-			print local_filename+'.wav already exists'
+			print '\x1b[4;31;40m' + local_filename+'.wav already exists' +'\x1b[0m'
 		else:
 			if local_ext == "mp3":
 				convert(local_filename,new_path)
