@@ -63,4 +63,5 @@ if __name__ == "__main__":
 			else:
 				if local_ext == "mp3":
 					convert(local_filename,new_path)
-			bar.update(curr_count)
+			if curr_count <= tot_num:
+				bar.update(curr_count)
